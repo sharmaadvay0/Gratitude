@@ -27,7 +27,7 @@ struct CreatePost: View {
                 VStack {
                     HStack(alignment: .top) {
                         Text("Make a post")
-                            .font(.system(size: 24))
+                            .font(.largeTitle)
                             .fontWeight(.bold)
                             .padding(.leading)
                             .padding(.top, 10)
@@ -65,6 +65,7 @@ struct CreatePost: View {
                             Text("Categories")
                                 .font(.title2)
                                 .fontWeight(.bold)
+                                .padding(.top, 25)
                             Text("What are you grateful for right now?")
                                 .font(.footnote)
                             
@@ -84,7 +85,7 @@ struct CreatePost: View {
                             Text("Description")
                                 .font(.title2)
                                 .fontWeight(.bold)
-                                .padding(.top)
+                                .padding(.top, 20)
                             Text("Anything you'd like to share?")
                                 .font(.footnote)
                             
@@ -97,6 +98,7 @@ struct CreatePost: View {
                             
                             Button(action: {
                                 print("make post")
+                                isShown = false
                             }) {
                                 ZStack {
                                     Capsule()
