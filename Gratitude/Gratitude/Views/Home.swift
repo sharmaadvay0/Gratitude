@@ -60,7 +60,7 @@ struct Home: View {
                 
                 
             }.sheet(isPresented: $makePost, content: {
-                Text("Make Post View Here")
+                CreatePost(isShown: $makePost)
             })
         }.padding(.top, -90)
         
