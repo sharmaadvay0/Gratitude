@@ -15,6 +15,10 @@ struct ContentView: View {
                     .tabItem {
                         Label("Home", systemImage: "house.fill")
                     }
+                Activity()
+                    .tabItem {
+                        Label("Activity", systemImage: "chart.bar.fill")
+                    }
             }
         
         
