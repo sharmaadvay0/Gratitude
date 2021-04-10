@@ -91,6 +91,11 @@ def user_follow():
     return user_ref.get().to_dict()
 
 
+def post_dict(post):
+    data = post.to_dict()
+    data["date"] = data["date"].isoformat()
+    return data
+
 
 @app.route("/api/post", methods=["POST"])
 def post_create():
@@ -110,6 +115,21 @@ def post_create():
         "date": datetime.utcnow(),
     })
 
-    post_dict = post_ref.get().to_dict()
-    post_dict["date"] = post_dict["date"].isoformat()
-    return post_dict, 201
+    return post_dict(post_ref.get()), 201
+
+
+@app.route("/api/feed/<username>")
+def feed(username):
+    user_ref = get_user_ref(username)
+    users = set([username] + user_ref.get().to_dict()["following"])
+
+    posts = []
+
+    query = (db.collection("post")
+            .order_by("date", direction=firestore.Query.DESCENDING))
+    for post in query.stream():
+        as_dict = post_dict(post)
+        if as_dict["username"] in users:
+            posts.append(as_dict)
+
+    return {"posts": posts}
