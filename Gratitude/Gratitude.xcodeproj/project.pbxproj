@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0684B2A262191EE00D8E1CE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0684B29262191EE00D8E1CE /* Data.swift */; };
 		C0D0B58F2621639500BD10E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0B58E2621639500BD10E7 /* AppDelegate.swift */; };
 		C0D0B5912621639500BD10E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0B5902621639500BD10E7 /* SceneDelegate.swift */; };
 		C0D0B5932621639500BD10E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0B5922621639500BD10E7 /* ContentView.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C0684B29262191EE00D8E1CE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		C0D0B58B2621639500BD10E7 /* Gratitude.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gratitude.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0D0B58E2621639500BD10E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0D0B5902621639500BD10E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C0684B28262191C900D8E1CE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C0684B29262191EE00D8E1CE /* Data.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C0D0B5822621639500BD10E7 = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +71,7 @@
 				C0D0B58E2621639500BD10E7 /* AppDelegate.swift */,
 				C0D0B5902621639500BD10E7 /* SceneDelegate.swift */,
 				C0D0B5922621639500BD10E7 /* ContentView.swift */,
+				C0684B28262191C900D8E1CE /* Models */,
 				C0D0B5A32621742300BD10E7 /* Views */,
 				C0D0B5942621639600BD10E7 /* Assets.xcassets */,
 				C0D0B5992621639600BD10E7 /* LaunchScreen.storyboard */,
@@ -157,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0D0B58F2621639500BD10E7 /* AppDelegate.swift in Sources */,
+				C0684B2A262191EE00D8E1CE /* Data.swift in Sources */,
 				C0D0B5912621639500BD10E7 /* SceneDelegate.swift in Sources */,
 				C0D0B5A52621744000BD10E7 /* Home.swift in Sources */,
 				C0D0B5932621639500BD10E7 /* ContentView.swift in Sources */,
