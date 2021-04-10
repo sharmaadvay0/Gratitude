@@ -1,3 +1,4 @@
+from datetime import datetime
 from types import SimpleNamespace
 
 from flask import Flask, request, abort
@@ -27,11 +28,6 @@ def validate(obj, types):
     return SimpleNamespace(**obj)
 
 
-@app.route("/")
-def hello_world():
-    return "Hello, World!"
-
-
 @app.route("/api/user/create", methods=["POST"])
 def user_create():
     parsed = validate(request.json, {
@@ -57,3 +53,26 @@ def user_get(username):
         return user.to_dict()
     else:
         abort(404, description="User not found")
+
+
+@app.route("/api/post/create", methods=["POST"])
+def post_create():
+    parsed = validate(request.json, {
+        "username": str,
+        "body": str,
+        "category": str,
+        "userMood": float,
+    })
+
+    _, post_ref = db.collection("post").add({
+        "username": parsed.username,
+        "body": parsed.body,
+        "category": parsed.category,
+        "userMood": parsed.userMood,
+        "sentimentMood": 0.0, # TODO
+        "date": datetime.utcnow(),
+    })
+
+    post_dict = post_ref.get().to_dict()
+    post_dict["date"] = post_dict["date"].isoformat()
+    return post_dict, 201
