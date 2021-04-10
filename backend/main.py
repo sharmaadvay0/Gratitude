@@ -57,13 +57,9 @@ def user_create():
         return user_ref.get().to_dict(), 201
 
 
-@app.route("/api/user")
-def user_get():
-    parsed = validate(request.json, {
-        "username": str,
-    })
-
-    return get_user_ref(parsed.username).get().to_dict()
+@app.route("/api/user/<username>")
+def user_get(username):
+    return get_user_ref(username).get().to_dict()
 
 
 @app.route("/api/user/follow", methods=["POST"])
