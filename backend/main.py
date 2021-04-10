@@ -71,7 +71,7 @@ def user_get(username):
     return get_user_ref(username).get().to_dict()
 
 
-@app.route("/api/user/follow", methods=["POST"])
+@app.route("/api/follow", methods=["POST"])
 def user_follow():
     parsed = validate(request.json, {
         "username": str,
