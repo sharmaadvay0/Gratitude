@@ -15,6 +15,9 @@ struct ContentView: View {
                     .tabItem {
                         Label("Home", systemImage: "house.fill")
                     }
+            }.accentColor(Color(red: 242/255, green: 163/255, blue: 25/255))
+            .onAppear {
+                UITabBar.appearance().barTintColor = .white
             }
         
         
