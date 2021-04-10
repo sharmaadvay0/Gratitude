@@ -16,8 +16,8 @@
 		C0D0B59B2621639600BD10E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0D0B5992621639600BD10E7 /* LaunchScreen.storyboard */; };
 		C0D0B5A52621744000BD10E7 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0B5A42621744000BD10E7 /* Home.swift */; };
 		E043A5B2262175A900E75603 /* CreatePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E043A5B1262175A900E75603 /* CreatePost.swift */; };
+		E04F5D70262231CF0055E218 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = E04F5D6F262231CF0055E218 /* SwiftUICharts */; };
 		E090A2F1262222F4008542C7 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E090A2F0262222F4008542C7 /* Activity.swift */; };
-		E090A2F526222497008542C7 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = E090A2F426222497008542C7 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E090A2F526222497008542C7 /* SwiftUICharts in Frameworks */,
+				E04F5D70262231CF0055E218 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +122,7 @@
 			);
 			name = Gratitude;
 			packageProductDependencies = (
-				E090A2F426222497008542C7 /* SwiftUICharts */,
+				E04F5D6F262231CF0055E218 /* SwiftUICharts */,
 			);
 			productName = Gratitude;
 			productReference = C0D0B58B2621639500BD10E7 /* Gratitude.app */;
@@ -152,7 +152,7 @@
 			);
 			mainGroup = C0D0B5822621639500BD10E7;
 			packageReferences = (
-				E090A2F326222497008542C7 /* XCRemoteSwiftPackageReference "ChartView" */,
+				E04F5D6E262231CF0055E218 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = C0D0B58C2621639500BD10E7 /* Products */;
 			projectDirPath = "";
@@ -385,7 +385,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E090A2F326222497008542C7 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		E04F5D6E262231CF0055E218 /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
@@ -396,9 +396,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E090A2F426222497008542C7 /* SwiftUICharts */ = {
+		E04F5D6F262231CF0055E218 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E090A2F326222497008542C7 /* XCRemoteSwiftPackageReference "ChartView" */;
+			package = E04F5D6E262231CF0055E218 /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
