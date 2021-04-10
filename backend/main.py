@@ -2,7 +2,7 @@ from datetime import datetime
 from types import SimpleNamespace
 
 from flask import Flask, request, abort, make_response
-from google.cloud import firestore
+from google.cloud import firestore, language_v1
 
 
 app = Flask(__name__)
@@ -30,6 +30,15 @@ def validate(obj, types):
                 f"expected '{expected_type.__name__}'",
             ]))
     return SimpleNamespace(**obj)
+
+
+def get_sentiment_mood(body):
+    client = language_v1.LanguageServiceClient()
+    document = language_v1.Document(content=body,
+            type_=language_v1.Document.Type.PLAIN_TEXT)
+    response = client.analyze_sentiment(request={"document": document})
+    sentiment = response.document_sentiment
+    return (sentiment.score + 1) / 2
 
 
 def get_user_ref(username):
@@ -111,7 +120,7 @@ def post_create():
         "body": parsed.body,
         "category": parsed.category,
         "userMood": parsed.userMood,
-        "sentimentMood": 0.0, # TODO
+        "sentimentMood": get_sentiment_mood(parsed.body),
         "date": datetime.utcnow(),
     })
 
