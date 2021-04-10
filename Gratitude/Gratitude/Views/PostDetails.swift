@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct PostDetails: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
-        Button(action: {print("here")}, label: {
-            Text("Button")
-        })
+        VStack {
+            HStack {
+                Button(action: {self.presentationMode.wrappedValue.dismiss()}, label: {
+                    Image(systemName: "chevron.backward").resizable().foregroundColor(.black).frame(width:15, height: 25)
+                })
+                Spacer()
+            }.padding(.leading, 25).padding(.top, 10)
+            Spacer()
+        }
     }
 }
 

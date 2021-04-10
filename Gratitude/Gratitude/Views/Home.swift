@@ -52,13 +52,13 @@ struct Home: View {
                     
                     Spacer()
                     
-                }.padding(.top, -90)
+                }
             }
             
             
         }.sheet(isPresented: $makePost, content: {
             CreatePost(isShown: $makePost)
-        })
+        }).padding(.top, -90)
         
         
     }
