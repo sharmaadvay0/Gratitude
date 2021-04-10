@@ -1,7 +1,7 @@
 from datetime import datetime
 from types import SimpleNamespace
 
-from flask import Flask, request, abort
+from flask import Flask, request, abort, make_response
 from google.cloud import firestore
 
 
@@ -9,35 +9,46 @@ app = Flask(__name__)
 db = firestore.Client()
 
 
+def die(status, message):
+    abort(make_response({"message": message}, status))
+
+
 def validate(obj, types):
     for key in types:
         if key not in obj:
-            abort(400, " ".join([
+            die(400, " ".join([
                 f"Missing required attribute '{key}'",
                 f"of type '{types[key].__name__}'",
             ]))
     for key in obj:
         if key not in types:
-            abort(400, f"Unexpected attribute '{key}'")
+            die(400, f"Unexpected attribute '{key}'")
     for key, expected_type in types.items():
         if not isinstance(obj[key], expected_type):
-            abort(400, " ".join([
+            die(400, " ".join([
                 f"Attribute '{key}' was type '{type(obj[key]).__name__}';",
                 f"expected '{expected_type.__name__}'",
             ]))
     return SimpleNamespace(**obj)
 
 
-@app.route("/api/user/create", methods=["POST"])
+def get_user_ref(username):
+    user_ref = db.collection("user").document(username)
+    if not user_ref.get().exists:
+        die(404, f"User '{username}' not found")
+    return user_ref
+
+
+@app.route("/api/user", methods=["POST"])
 def user_create():
     parsed = validate(request.json, {
-        "realName": str,
         "username": str,
+        "realName": str,
     })
 
     user_ref = db.collection("user").document(parsed.username)
     if user_ref.get().exists:
-        abort(409, description=f"Username '{parsed.username}' is taken")
+        die(409, f"Username '{parsed.username}' is taken")
     else:
         user_ref.set({
             "realName": parsed.realName,
@@ -46,16 +57,46 @@ def user_create():
         return user_ref.get().to_dict(), 201
 
 
-@app.route("/api/user/get/<username>")
-def user_get(username):
-    user = db.collection("user").document(username).get()
-    if user.exists:
-        return user.to_dict()
+@app.route("/api/user")
+def user_get():
+    parsed = validate(request.json, {
+        "username": str,
+    })
+
+    return get_user_ref(parsed.username).get().to_dict()
+
+
+@app.route("/api/user/follow", methods=["POST"])
+def user_follow():
+    parsed = validate(request.json, {
+        "username": str,
+        "targetUsername": str,
+        "follow": bool,
+    })
+
+    user_ref = get_user_ref(parsed.username)
+    target_ref = get_user_ref(parsed.targetUsername)
+
+    if parsed.follow:
+        if parsed.targetUsername in user_ref.get().to_dict()["following"]:
+            die(400, f"Already following '{parsed.targetUsername}'")
+        else:
+            user_ref.update({
+                "following": firestore.ArrayUnion([parsed.targetUsername])
+            })
     else:
-        abort(404, description="User not found")
+        if parsed.targetUsername not in user_ref.get().to_dict()["following"]:
+            die(400, f"Already not following '{parsed.targetUsername}'")
+        else:
+            user_ref.update({
+                "following": firestore.ArrayRemove([parsed.targetUsername])
+            })
+
+    return user_ref.get().to_dict()
 
 
-@app.route("/api/post/create", methods=["POST"])
+
+@app.route("/api/post", methods=["POST"])
 def post_create():
     parsed = validate(request.json, {
         "username": str,
