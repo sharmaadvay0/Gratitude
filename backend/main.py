@@ -118,6 +118,18 @@ def post_create():
     return post_dict(post_ref.get()), 201
 
 
+@app.route("/api/post/<username>")
+def post_history(username):
+    user_ref = get_user_ref(username)
+    
+    query = (db.collection("post")
+            .where("username", "==", username)
+            .order_by("date"))
+    posts = [post_dict(post) for post in query.stream()]
+
+    return {"posts": posts}
+
+
 @app.route("/api/feed/<username>")
 def feed(username):
     user_ref = get_user_ref(username)
