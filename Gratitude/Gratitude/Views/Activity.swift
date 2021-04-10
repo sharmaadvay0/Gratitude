@@ -9,7 +9,26 @@ import SwiftUI
 
 struct Activity: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color(red: 255 / 255, green: 246 / 255, blue: 225 / 255)
+                .ignoresSafeArea()
+            VStack {
+                HStack(alignment: .top) {
+                    Text("Make a post")
+                        .font(.system(size: 24))
+                        .fontWeight(.bold)
+                        .padding(.leading)
+                        .padding(.top, 10)
+                }
+                .padding([.top, .trailing], 25)
+                
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        //
+                    }
+                }
+            }
+        }
     }
 }
 
