@@ -20,11 +20,8 @@ struct Home: View {
     
     var body: some View {
         NavigationView {
-            
             ZStack {
-                
-                Color(red: 255 / 255, green: 246 / 255, blue: 225 / 255)
-                    .ignoresSafeArea()
+                Color(red: 255/255, green: 246/255, blue: 225/255).ignoresSafeArea()
                 VStack {
                     
                     HStack(alignment: .top) {
@@ -45,24 +42,23 @@ struct Home: View {
                         Button(action: {
                             makePost = true
                         }, label: {
-                            
                             Image(systemName: "plus").resizable()
-                                .frame(width: 24, height: 24, alignment: .center).foregroundColor(.black).padding(.top, 10)
+                                .frame(width: 20, height: 20, alignment: .center).foregroundColor(.black).padding(.top, 10)
                             
                         })
                     }.padding(.trailing, 25)
                     
                     ListOfPosts()
                     
-                    
                     Spacer()
+                    
                 }
-                
-                
-            }.sheet(isPresented: $makePost, content: {
-                CreatePost(isShown: $makePost)
-            })
-        }.padding(.top, -90)
+            }
+            
+            
+        }.sheet(isPresented: $makePost, content: {
+            CreatePost(isShown: $makePost)
+        }).padding(.top, -90)
         
         
     }
@@ -73,23 +69,26 @@ struct PostPreview: View {
     let info: String?
     
     var body: some View {
-        Button(action: {
-            print("Clicked Post")
-        }) {
-            ZStack {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(name ?? "Name Here").padding(.bottom, 10).font(.system(size: 20, weight: .bold)).foregroundColor(.init(red: 130/255, green: 130/255, blue: 130/255))
-                        Text(info ?? "Info Here").foregroundColor(.black)
-                    }.padding()
-                    Spacer()
+        
+        NavigationLink(
+            destination: PostDetails(),
+            label: {
+                ZStack {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(name ?? "Name Here").padding(.bottom, 10).font(.system(size: 20, weight: .bold)).foregroundColor(.init(red: 130/255, green: 130/255, blue: 130/255))
+                            Text(info ?? "Info Here").foregroundColor(.black)
+                        }.padding()
+                        Spacer()
+                    }
                 }
-            }
-            .background (
-                RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color.white)
-            ).padding([.trailing,.leading], 25)
-            .padding(.top, 10)
-        }
+                .background (
+                    RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color.white).shadow(radius: 3)
+                ).padding([.trailing,.leading], 25)
+                .padding(.top, 10)
+            })
+        
+        
         
         
         
