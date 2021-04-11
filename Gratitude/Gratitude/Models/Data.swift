@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post: Decodable, Hashable {
+struct Post: Codable, Hashable {
 //    "body": "Life is terrible, horrible, detestable, and miserable, but I'm grateful for burritos.",
 //                "category": "food",
 //                "date": "2021-04-10T21:12:08.948830+00:00",
