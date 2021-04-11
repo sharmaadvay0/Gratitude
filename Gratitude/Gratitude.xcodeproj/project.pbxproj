@@ -20,6 +20,7 @@
 		C0DD62DD2622303B00830392 /* PostDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD62DC2622303B00830392 /* PostDetails.swift */; };
 		E043A5B2262175A900E75603 /* CreatePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E043A5B1262175A900E75603 /* CreatePost.swift */; };
 		E04F5D70262231CF0055E218 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = E04F5D6F262231CF0055E218 /* SwiftUICharts */; };
+		E08BED3326227CAD00424B4B /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08BED3226227CAD00424B4B /* Categories.swift */; };
 		E090A2F1262222F4008542C7 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E090A2F0262222F4008542C7 /* Activity.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		C0D0B5A42621744000BD10E7 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		C0DD62DC2622303B00830392 /* PostDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetails.swift; sourceTree = "<group>"; };
 		E043A5B1262175A900E75603 /* CreatePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePost.swift; sourceTree = "<group>"; };
+		E08BED3226227CAD00424B4B /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		E090A2F0262222F4008542C7 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				C0684B29262191EE00D8E1CE /* Data.swift */,
+				E08BED3226227CAD00424B4B /* Categories.swift */,
 				C08588D52622584500A1AF31 /* Networking.swift */,
 			);
 			path = Models;
@@ -196,6 +199,7 @@
 				E090A2F1262222F4008542C7 /* Activity.swift in Sources */,
 				C0D0B5912621639500BD10E7 /* SceneDelegate.swift in Sources */,
 				C0D0B5A52621744000BD10E7 /* Home.swift in Sources */,
+				E08BED3326227CAD00424B4B /* Categories.swift in Sources */,
 				C0DD62DD2622303B00830392 /* PostDetails.swift in Sources */,
 				E043A5B2262175A900E75603 /* CreatePost.swift in Sources */,
 				C08588D32622515200A1AF31 /* Profile.swift in Sources */,

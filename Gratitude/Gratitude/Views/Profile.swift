@@ -35,7 +35,7 @@ struct Profile: View {
                         
                         ForEach(network.userPosts, id: \.self) {
                             post in
-                            PostPreview(name: post.username, info: post.body)
+                            PostPreview(name: post.username, info: post.body, category: post.category, moodRating: post.userMood)
                         }
                         
                         Spacer()

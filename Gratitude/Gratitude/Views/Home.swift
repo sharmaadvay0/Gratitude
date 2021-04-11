@@ -56,11 +56,13 @@ struct Home: View {
 struct PostPreview: View {
     let name: String?
     let info: String?
+    let category: String?
+    let moodRating: Double?
     
     var body: some View {
         
         NavigationLink(
-            destination: PostDetails(name: name ?? "Name", info: info ?? "Post Info"),
+            destination: PostDetails(name: name ?? "Name", info: info ?? "Post Info", category: category ?? "other", moodRating: moodRating ?? 5.0),
             label: {
                 ZStack {
                     HStack {
@@ -88,7 +90,7 @@ struct ListOfPosts: View {
             LazyVStack {
                 ForEach(posts, id: \.self) {
                     post in
-                    PostPreview(name: post.username, info: post.body)
+                    PostPreview(name: post.username, info: post.body, category: post.category, moodRating: post.userMood)
                 }
             }.padding(.bottom, 100)
         }
