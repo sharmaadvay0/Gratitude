@@ -14,6 +14,8 @@ def die(status, message):
 
 
 def validate(obj, types):
+    if obj is None:
+        die(400, "No JSON body provided")
     for key, type_spec in types.items():
         if isinstance(type_spec, tuple) and None in type_spec:
             continue
