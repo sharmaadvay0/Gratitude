@@ -9,9 +9,11 @@ import SwiftUI
 
 struct CreatePost: View {
     @Binding var isShown: Bool
-    @State private var mood: Double = 4.0
+    @State private var moodRating: Double = 4.0
     @State private var selectedCategory: String = ""
     @State private var postText: String = "Today I am feeling..."
+    
+    @ObservedObject var networking = Networking()
     
     init(isShown: Binding<Bool>) {
         _isShown = isShown
@@ -53,9 +55,9 @@ struct CreatePost: View {
                             .font(.footnote)
                         
                         HStack {
-                            Slider(value: $mood, in: 0...5, step: 0.1)
+                            Slider(value: $moodRating, in: 0...5, step: 0.1)
                                 .accentColor(Color(red: 242/255, green: 163/255, blue: 24/255))
-                            Text(String(format: "%.1f", mood))
+                            Text(String(format: "%.1f", moodRating))
                                 .multilineTextAlignment(.trailing)
                                 .frame(width: 50.0)
                         }
@@ -84,8 +86,13 @@ struct CreatePost: View {
                             .foregroundColor(Color(white: 0.4))
                         
                         Button(action: {
-                            print("make post")
-                            isShown = false
+                            let post = Post(body: postText, category: selectedCategory, date: "", sentimentMood: 0.0, userMood: moodRating, username: "justinyaodu")
+                            networking.postNewPost(post: post) { (data, response, error) in
+                                print(response ?? "nothing")
+                                if (error == nil) {
+                                    isShown = false
+                                }
+                            }
                         }) {
                             ZStack {
                                 Capsule()
@@ -98,7 +105,7 @@ struct CreatePost: View {
                         }
                         .padding(.top)
                     }
-                    .padding([.top, .leading, .trailing])
+                    .padding(.all)
                 }
             }
         }
