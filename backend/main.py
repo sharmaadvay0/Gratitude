@@ -17,7 +17,7 @@ def validate(obj, types):
     if obj is None:
         die(400, "No JSON body provided")
     for key, type_spec in types.items():
-        if isinstance(type_spec, tuple) and None in type_spec:
+        if isinstance(type_spec, tuple) and type(None) in type_spec:
             continue
         if key not in obj:
             die(400, " ".join([
@@ -117,8 +117,8 @@ def post_create():
         "body": str,
         "category": str,
         "userMood": float,
-        "sentimentMood": (str, None),
-        "date": (str, None),
+        "sentimentMood": (float, type(None)),
+        "date": (str, type(None)),
     })
 
     try:
