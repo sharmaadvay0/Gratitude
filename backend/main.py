@@ -16,6 +16,9 @@ def die(status, message):
 def validate(obj, types):
     if obj is None:
         die(400, "No JSON body provided")
+    for key in obj:
+        if key not in types:
+            die(400, f"Unexpected attribute '{key}'")
     for key, type_spec in types.items():
         if isinstance(type_spec, tuple) and type(None) in type_spec:
             continue
@@ -24,14 +27,10 @@ def validate(obj, types):
                 f"Missing required attribute '{key}'",
                 f"of type '{types[key].__name__}'",
             ]))
-    for key in obj:
-        if key not in types:
-            die(400, f"Unexpected attribute '{key}'")
-    for key, expected_type in types.items():
-        if not isinstance(obj[key], expected_type):
+        if not isinstance(obj[key], type_spec):
             die(400, " ".join([
                 f"Attribute '{key}' was type '{type(obj[key]).__name__}';",
-                f"expected '{expected_type.__name__}'",
+                f"expected '{type_spec.__name__}'",
             ]))
     return SimpleNamespace(**obj)
 
