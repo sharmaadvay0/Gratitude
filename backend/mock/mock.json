@@ -86,6 +86,76 @@
       "category": "activities",
       "userMood": 0.25,
       "date": "2021-04-07T18:07:52"
+    },
+    {
+      "username": "wllmwu",
+      "body": "Until I sprained my ankle today, I never realized how much I take it for granted. I'm also thankful for painkillers 🤪",
+      "category": "health",
+      "userMood": 0.0,
+      "date": "2021-04-08T23:27:38"
+    },
+    {
+      "username": "justinyaodu",
+      "body": "I'm tutoring for an Intro to Python course, and the students' curiosity and perseverance is really inspiring.",
+      "category": "career",
+      "userMood": 0.75,
+      "date": "2021-04-07T18:02"
+    },
+    {
+      "username": "justinyaodu",
+      "body": "Nothing beats home cooking 😋",
+      "category": "food",
+      "userMood": 1.0,
+      "date": "2021-04-11T03:23:56"
+    },
+    {
+      "username": "justinyaodu",
+      "body": "I wish I could see my friends in person, but at least we can keep in touch digitally. I've even made some new friends online, which is really cool.",
+      "category": "family",
+      "userMood": 0.5,
+      "date": "2021-04-06T04:49:23"
+    },
+    {
+      "username": "justinyaodu",
+      "body": "Whoohoo, got my first dose! Huge thanks to our healthcare workers. The end of lockdown is near 💉💉",
+      "category": "health",
+      "userMood": 1.0,
+      "date": "2021-04-10T02:27:31"
+    },
+    {
+      "username": "sharmaadvay0",
+      "body": "I use a lot of open-source software, and it's really amazing how much work is done by unpaid volunteers. I have so much respect and gratitude for the efforts of these outstanding developers.",
+      "category": "technology",
+      "userMood": 0.75,
+      "date": "2021-04-08T21:52:57"
+    },
+    {
+      "username": "wllmwu",
+      "body": "Electricity, gas, and running water.",
+      "category": "necessities",
+      "userMood": 0.5,
+      "date": "2021-04-06T00:21:27"
+    },
+    {
+      "username": "alacau",
+      "body": "I almost left my hoodie behind at the park, but a complete stranger hollered at me to let me know. Thanks, whoever you are!",
+      "category": "community",
+      "userMood": 0.75,
+      "date": "2021-04-09T01:42:33"
+    },
+    {
+      "username": "justinyaodu",
+      "body": "Huge shout out to everyone who contributes to Wikipedia! I had a lot of fun going down a Wikipedia rabbit hole today.",
+      "category": "activities",
+      "userMood": 0.5,
+      "date": "2021-04-06T04:34:21"
+    },
+    {
+      "username": "justinyaodu",
+      "body": "I had a great time surfing with @sharmaadvay0 today.",
+      "category": "activities",
+      "userMood": 0.75,
+      "date": "2021-04-08T01:22:13"
     }
   ]
 }
