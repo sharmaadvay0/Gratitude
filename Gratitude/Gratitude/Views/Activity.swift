@@ -13,7 +13,7 @@ struct Activity: View {
     @ObservedObject var graphNetworking = GraphNetworking()
     @ObservedObject var network = Networking()
     
-    let chartStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color(red: 219/255, green: 94/255, blue: 92/255), gradientColor: GradientColor(start: Color(red: 219/255, green: 94/255, blue: 92/255), end: Color(red: 219/255, green: 94/255, blue: 92/255)), textColor: Color(red: 130/255, green: 130/255, blue: 130/255), legendTextColor: Color.black, dropShadowColor: Color.black)
+    let chartStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color(red: 219/255, green: 94/255, blue: 92/255), gradientColor: GradientColor(start: Color(red: 168/255, green: 62/255, blue: 102/255), end: Color(red: 219/255, green: 94/255, blue: 92/255)), textColor: Color(red: 130/255, green: 130/255, blue: 130/255), legendTextColor: Color.black, dropShadowColor: Color.black)
     
     var body: some View {
         ZStack {
