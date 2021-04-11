@@ -3,6 +3,7 @@ from types import SimpleNamespace
 
 from flask import Flask, request, abort, make_response
 from google.cloud import firestore, language_v1
+from scipy.stats import linregress
 
 
 app = Flask(__name__)
@@ -144,9 +145,23 @@ def post_history(username):
     query = (db.collection("post")
             .where("username", "==", username)
             .order_by("date"))
-    posts = [post_dict(post) for post in query.stream()]
+    posts = [post.to_dict() for post in query.stream()]
 
-    return {"posts": posts}
+    if len(posts) >= 2:
+        dates = [post["date"].timestamp() for post in posts]
+        moods = [(post["userMood"] + post["sentimentMood"]) / 2 for post in posts]
+        regression = linregress(dates, moods)
+        total_change = regression.slope * (dates[-1] - dates[0])
+    else:
+        total_change = 0
+
+    for post in posts:
+        post["date"] = post["date"].isoformat()
+
+    return {
+        "posts": posts,
+        "totalChange": total_change,
+    }
 
 
 @app.route("/api/feed/<username>")
