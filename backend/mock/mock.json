@@ -1,0 +1,91 @@
+{
+  "user":
+  [
+    {
+      "username": "sharmaadvay0",
+      "realName": "Advay Sharma"
+    },
+    {
+      "username": "alacau",
+      "realName": "Alan Cao"
+    },
+    {
+      "username": "justinyaodu",
+      "realName": "Justin Yao Du"
+    },
+    {
+      "username": "wllmwu",
+      "realName": "William Wu"
+    }
+  ],
+  "follow":
+  [
+    {
+      "username": "justinyaodu",
+      "targetUsername": "sharmaadvay0",
+      "follow": true
+    },
+    {
+      "username": "justinyaodu",
+      "targetUsername": "alacau",
+      "follow": true
+    },
+    {
+      "username": "justinyaodu",
+      "targetUsername": "wllmwu",
+      "follow": true
+    }
+  ],
+  "post":
+  [
+    {
+      "username": "justinyaodu",
+      "body": "How have I never tried Ritz crackers with ice cream? This is the best combo ever.",
+      "category": "food",
+      "userMood": 0.75,
+      "date": "2021-04-07T01:47:33"
+    },
+    {
+      "username": "justinyaodu",
+      "body": "Today, I'm grateful for the Beatles. \"Let It Be\" always makes me feel better after a rough day.",
+      "category": "art",
+      "userMood": 0.5,
+      "date": "2021-04-08T02:23:47"
+    },
+    {
+      "username": "justinyaodu",
+      "body": "After losing my internet connection in the middle of class, I realize how much I've taken WiFi and cellular data for granted. Hopefully we'll be done with remote learning soon!",
+      "category": "necessities",
+      "userMood": 0.75,
+      "date": "2021-04-09T18:44:01"
+    },
+    {
+      "username": "justinyaodu",
+      "body": "The weather was lovely today! I can't wait for summer.",
+      "category": "nature",
+      "userMood": 1.0,
+      "date": "2021-04-10T22:27:32"
+    },
+    {
+      "username": "sharmaadvay0",
+      "body": "The Apple ecosystem keeps my life simple and productive. Everything just works.",
+      "category": "technology",
+      "userMood": 0.75,
+      "date": "2021-04-07T07:24:33"
+    },
+    {
+      "username": "sharmaadvay0",
+      "body": "I went on a five-mile hike today. The redwoods were beautiful 🌲",
+      "category": "nature",
+      "userMood": 1.0,
+      "date": "2021-04-08T05:52:01"
+    },
+    {
+      "username": "alacau",
+      "body": "Someone stole my skateboard last night. I had some great times with it though. If I can't get it back, I guess I'll have to buy a new one.",
+      "category": "activities",
+      "userMood": 0.25,
+      "date": "2021-04-07T18:07:52"
+    }
+  ]
+}
