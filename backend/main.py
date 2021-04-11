@@ -113,6 +113,8 @@ def post_create():
         "body": str,
         "category": str,
         "userMood": float,
+        "sentimentMood": str,
+        "date": str,
     })
 
     _, post_ref = db.collection("post").add({

@@ -77,4 +77,20 @@ class Networking: ObservableObject {
             datatask.resume()
         }
     }
+    
+    func postNewPost(post: Post, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        if let url = URL(string: "https://gratitude-310305.uc.r.appspot.com/api/post") {
+            let jsonEncoder = JSONEncoder()
+            do {
+                let data = try jsonEncoder.encode(post)
+                let urlSession = URLSession(configuration: .default)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = "POST"
+                let uploadTask = urlSession.uploadTask(with: urlRequest, from: data, completionHandler: completionHandler)
+                uploadTask.resume()
+            } catch {
+                print(error)
+            }
+        }
+    }
 }
