@@ -19,6 +19,8 @@ struct ContentView: View {
                     .tabItem {
                         Label("Activity", systemImage: "chart.bar.fill")
                     }
+                Profile()
+                    .tabItem { Label("Profile", systemImage: "person.crop.circle") }
             }
         
         

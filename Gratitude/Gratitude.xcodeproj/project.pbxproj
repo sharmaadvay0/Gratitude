@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C0684B2A262191EE00D8E1CE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0684B29262191EE00D8E1CE /* Data.swift */; };
+		C08588D32622515200A1AF31 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08588D22622515200A1AF31 /* Profile.swift */; };
+		C08588D62622584500A1AF31 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08588D52622584500A1AF31 /* Networking.swift */; };
 		C0D0B58F2621639500BD10E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0B58E2621639500BD10E7 /* AppDelegate.swift */; };
 		C0D0B5912621639500BD10E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0B5902621639500BD10E7 /* SceneDelegate.swift */; };
 		C0D0B5932621639500BD10E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0B5922621639500BD10E7 /* ContentView.swift */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		C0684B29262191EE00D8E1CE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		C08588D22622515200A1AF31 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		C08588D52622584500A1AF31 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		C0D0B58B2621639500BD10E7 /* Gratitude.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gratitude.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0D0B58E2621639500BD10E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0D0B5902621639500BD10E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				C0684B29262191EE00D8E1CE /* Data.swift */,
+				C08588D52622584500A1AF31 /* Networking.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -104,6 +109,7 @@
 				C0DD62DC2622303B00830392 /* PostDetails.swift */,
 				E043A5B1262175A900E75603 /* CreatePost.swift */,
 				E090A2F0262222F4008542C7 /* Activity.swift */,
+				C08588D22622515200A1AF31 /* Profile.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,12 +191,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0D0B58F2621639500BD10E7 /* AppDelegate.swift in Sources */,
+				C08588D62622584500A1AF31 /* Networking.swift in Sources */,
 				C0684B2A262191EE00D8E1CE /* Data.swift in Sources */,
 				E090A2F1262222F4008542C7 /* Activity.swift in Sources */,
 				C0D0B5912621639500BD10E7 /* SceneDelegate.swift in Sources */,
 				C0D0B5A52621744000BD10E7 /* Home.swift in Sources */,
 				C0DD62DD2622303B00830392 /* PostDetails.swift in Sources */,
 				E043A5B2262175A900E75603 /* CreatePost.swift in Sources */,
+				C08588D32622515200A1AF31 /* Profile.swift in Sources */,
 				C0D0B5932621639500BD10E7 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
