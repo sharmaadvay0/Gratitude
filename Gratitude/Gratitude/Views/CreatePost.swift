@@ -115,21 +115,8 @@ struct CreatePost_Previews: PreviewProvider {
 struct CategoryView: View {
     @Binding var selectedCategory: String
     @State private var totalHeight = CGFloat.zero
-    private var categories: [String] = ["activities", "art", "career", "community", "emotions", "family", "food", "health", "nature", "necessities", "technology", "other"]
-    private var categoryTitles: [String: String] = [
-        "activities": "Activities & Experiences",
-        "art": "Art",
-        "career": "Career & Education",
-        "community": "Community",
-        "emotions": "Emotions & Faith",
-        "family": "Family & Friends",
-        "food": "Food & Drink",
-        "health": "Health & Fitness",
-        "nature": "Nature & Weather",
-        "necessities": "Necessities",
-        "technology": "Technology",
-        "other": "Other"
-    ]
+    private let categories = Categories.categories
+    private let categoryTitles = Categories.categoryTitles
     
     init(selectedCategory: Binding<String>) {
         _selectedCategory = selectedCategory
