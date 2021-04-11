@@ -88,7 +88,6 @@ struct CreatePost: View {
                         Button(action: {
                             let post = Post(body: postText, category: selectedCategory, date: "", sentimentMood: 0.0, userMood: moodRating, username: "justinyaodu")
                             networking.postNewPost(post: post) { (data, response, error) in
-                                print(response ?? "nothing")
                                 if (error == nil) {
                                     isShown = false
                                 }
