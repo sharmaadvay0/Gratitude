@@ -17,7 +17,7 @@ struct Profile: View {
                 VStack(alignment: .leading) {
                     Text(self.network.user.realName).bold().padding([.leading, .trailing], 25).font(.largeTitle).padding(.top, 20)
                     
-                    Text(String(self.network.user.following.count) + " Followers").padding([.leading, .trailing], 25).font(.title2).padding(.top, 10)
+                    Text(String(self.network.user.following.count) + " Following").padding([.leading, .trailing], 25).font(.title2).padding(.top, 10)
                     
                     
                     Text("Posts").padding([.leading, .trailing], 25).font(.title).padding(.top, 20)

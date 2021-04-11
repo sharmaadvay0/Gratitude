@@ -37,7 +37,7 @@ class GraphNetworking: ObservableObject {
                                 var technology = 0
                                 var other = 0
                                 for post in posts {
-                                    let averagedMood = (post.sentimentMood + post.userMood) / 2
+                                    let averagedMood = ((post.sentimentMood + post.userMood) / 2) * 100
                                     mood.append(averagedMood)
                                     
                                     if post.category == "activities" {
