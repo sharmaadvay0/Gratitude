@@ -14,7 +14,11 @@ def die(status, message):
 
 
 def validate(obj, types):
-    for key in types:
+    if obj is None:
+        die(400, "No JSON body provided")
+    for key, type_spec in types.items():
+        if isinstance(type_spec, tuple) and type(None) in type_spec:
+            continue
         if key not in obj:
             die(400, " ".join([
                 f"Missing required attribute '{key}'",
@@ -113,9 +117,14 @@ def post_create():
         "body": str,
         "category": str,
         "userMood": float,
-        "sentimentMood": str,
-        "date": str,
+        "sentimentMood": (float, type(None)),
+        "date": (str, type(None)),
     })
+
+    try:
+        date = datetime.fromisoformat(parsed.date)
+    except AttributeError:
+        date = datetime.utcnow()
 
     _, post_ref = db.collection("post").add({
         "username": parsed.username,
@@ -123,7 +132,7 @@ def post_create():
         "category": parsed.category,
         "userMood": parsed.userMood,
         "sentimentMood": get_sentiment_mood(parsed.body),
-        "date": datetime.utcnow(),
+        "date": date,
     })
 
     return post_dict(post_ref.get()), 201
