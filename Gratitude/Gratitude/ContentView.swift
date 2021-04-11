@@ -9,19 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-
-            TabView {
-                Home()
-                    .tabItem {
-                        Label("Home", systemImage: "house.fill")
-                    }
-                Activity()
-                    .tabItem {
-                        Label("Activity", systemImage: "chart.bar.fill")
-                    }
-                Profile()
-                    .tabItem { Label("Profile", systemImage: "person.crop.circle") }
-            }
+        
+        TabView {
+            Home()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+            Activity()
+                .tabItem {
+                    Label("Activity", systemImage: "chart.bar.fill")
+                }
+            Profile()
+                .tabItem { Label("Profile", systemImage: "person.crop.circle") }
+        }.accentColor(Color(red: 242/255, green: 163/255, blue: 25/255))
         
         
     }
