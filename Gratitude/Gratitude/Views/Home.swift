@@ -46,7 +46,13 @@ struct Home: View {
             
             
         }.sheet(isPresented: $makePost, content: {
-            CreatePost(isShown: $makePost)
+            CreatePost(isShown: $makePost) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                    self.network.fetchFeed(username: "justinyaodu")
+                    self.network.fetchUser(username: "justinyaodu")
+                }
+                
+            }
         }).padding(.top, -90)
         
         

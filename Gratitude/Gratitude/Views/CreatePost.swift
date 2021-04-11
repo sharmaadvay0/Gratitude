@@ -11,11 +11,14 @@ struct CreatePost: View {
     @Binding var isShown: Bool
     @State private var moodRating: Double = 4.0
     @State private var selectedCategory: String = ""
-    @State private var postText: String = "Today I am feeling..."
+    @State private var postText: String = ""
     
     @ObservedObject var networking = Networking()
     
-    init(isShown: Binding<Bool>) {
+    var completionHandler:() -> Void
+    
+    init(isShown: Binding<Bool>, completionHandler: @escaping () -> Void) {
+        self.completionHandler = completionHandler
         _isShown = isShown
         UITextView.appearance().backgroundColor = .clear
     }
@@ -39,7 +42,7 @@ struct CreatePost: View {
                     }, label: {
                         Image(systemName: "xmark")
                             .resizable()
-                            .frame(width: 24, height: 24, alignment: .center)
+                            .frame(width: 20, height: 20, alignment: .center)
                             .foregroundColor(.black)
                             .padding(.top, 10)
                     })
@@ -75,7 +78,7 @@ struct CreatePost: View {
                             .font(.title2)
                             .fontWeight(.bold)
                             .padding(.top, 20)
-                        Text("Anything you'd like to share?")
+                        Text("How are you feeling today?")
                             .font(.footnote)
                         
                         TextEditor(text: $postText)
@@ -86,11 +89,12 @@ struct CreatePost: View {
                             .foregroundColor(Color(white: 0.4))
                         
                         Button(action: {
-                            let post = Post(body: postText, category: selectedCategory, date: "", sentimentMood: 0.0, userMood: moodRating, username: "justinyaodu")
+                            let post = NewPost(body: postText, category: selectedCategory, userMood: moodRating, username: "justinyaodu")
                             networking.postNewPost(post: post) { (data, response, error) in
                                 if (error == nil) {
                                     isShown = false
                                 }
+                                self.completionHandler()
                             }
                         }) {
                             ZStack {
@@ -113,7 +117,9 @@ struct CreatePost: View {
 
 struct CreatePost_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePost(isShown: .constant(true))
+        CreatePost(isShown: .constant(true)) {
+            
+        }
     }
 }
 

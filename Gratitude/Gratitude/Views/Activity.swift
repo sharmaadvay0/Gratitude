@@ -27,12 +27,20 @@ struct Activity: View {
                         .padding(.leading)
                         .padding(.top, 20)
                     Spacer()
+                }.padding(.bottom)
+                if self.network.totalChange < -0.1 {
+                    Text("Try making a post about what you are grateful for to improve your mood!")
+                        .multilineTextAlignment(.center)
+                } else if self.network.totalChange >= -0.1 && self.network.totalChange <= 0.1 {
+                    Text("You are on the right track! Try writing about what you are grateful for to improve your mood!").multilineTextAlignment(.center)
+                } else {
+                    Text("Good job! Your mood has improved significantly over time.").multilineTextAlignment(.center)
                 }
-                
                 ScrollView {
                     VStack(alignment: .leading) {
                         GeometryReader { geometry in
                             VStack {
+                                
                                 LineView(
                                     data: self.graphNetworking.moodArray,
                                     title: "Mood",
@@ -45,6 +53,7 @@ struct Activity: View {
                                             .fill(Color(white: 1.0, opacity: 1.0))
                                             .shadow(radius: 3)
                                             .padding(.top)
+                                            .padding(.bottom, -10)
                                     )
                                 
                                 BarChartView(
@@ -55,11 +64,13 @@ struct Activity: View {
                                     dropShadow: false
                                 )
                                     .padding(.top)
+                                .padding(.bottom, -10)
                                     .background(
                                         RoundedRectangle(cornerRadius: 20)
                                             .fill(Color(white: 1.0, opacity: 1.0))
                                             .shadow(radius: 3)
                                             .padding(.top)
+                                            .padding(.bottom, -10)
                                             
                                     )
                             }
@@ -101,6 +112,7 @@ struct Activity: View {
                             }
                         }
                         .padding(.top)
+                        .padding(.bottom)
                     }
                     .padding(.horizontal)
                 }
