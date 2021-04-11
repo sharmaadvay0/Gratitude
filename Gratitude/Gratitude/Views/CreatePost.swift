@@ -89,7 +89,7 @@ struct CreatePost: View {
                             .foregroundColor(Color(white: 0.4))
                         
                         Button(action: {
-                            let post = NewPost(body: postText, category: selectedCategory, userMood: moodRating + 0.01, username: "justinyaodu")
+                            let post = NewPost(body: postText, category: selectedCategory, userMood: (moodRating/5) + 0.01, username: "justinyaodu")
                             networking.postNewPost(post: post) { (data, response, error) in
                                 if (error == nil) {
                                     isShown = false
