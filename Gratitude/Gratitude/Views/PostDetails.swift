@@ -38,7 +38,7 @@ struct PostDetails: View {
                     Spacer()
                 }
                 
-                Text(String(format: "Mood rating: %.1f", moodRating)).fontWeight(.bold).font(.title).padding(.top, 10)
+                Text("Mood rating: " + String(moodRating * 100) + "%").fontWeight(.bold).font(.title).padding(.top, 10)
             }.padding()
             Spacer()
         }.onAppear {
