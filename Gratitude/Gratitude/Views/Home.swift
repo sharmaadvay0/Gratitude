@@ -47,7 +47,7 @@ struct Home: View {
             
         }.sheet(isPresented: $makePost, content: {
             CreatePost(isShown: $makePost) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1){
                     self.network.fetchFeed(username: "justinyaodu")
                     self.network.fetchUser(username: "justinyaodu")
                 }
