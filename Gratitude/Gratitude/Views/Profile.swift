@@ -23,15 +23,6 @@ struct Profile: View {
                 ScrollView {
                     LazyVStack(alignment: .leading) {
                         
-    //                    HStack(alignment: .top) {
-    //
-    //                        Text("Your Profile").bold().font(.largeTitle).padding(.leading, 25).padding(.top, 10)
-    //
-    //                        Spacer()
-    //
-    //                    }.padding(.trailing, 25)
-                        
-                        
                         
                         ForEach(network.userPosts, id: \.self) {
                             post in
