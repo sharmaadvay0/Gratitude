@@ -9,13 +9,11 @@ import SwiftUI
 import SwiftUICharts
 
 struct Activity: View {
-    let moodData: [Double] = [0.0, 0.0, 0.0, 2.0, 2.2, 3.6, 4.4, 4.7, 3.1, 3.8, 4.0, 4.1, 4.8, 5.0, 4.7]
-    let categoryData: [Double] = [1.0, 5.0, 4.0, 8.0, 6.0, 7.0]
-    let numPosts: Int = 10
-    let numFollowers: Int = 20
-    let numFollowing: Int = 30
     
-    let chartStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color(red: 255/255, green: 163/255, blue: 24/255), gradientColor: GradientColors.orange, textColor: Color(red: 130/255, green: 130/255, blue: 130/255), legendTextColor: Color.black, dropShadowColor: Color.black)
+    @ObservedObject var graphNetworking = GraphNetworking()
+    @ObservedObject var network = Networking()
+    
+    let chartStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color(red: 219/255, green: 94/255, blue: 92/255), gradientColor: GradientColor(start: Color(red: 168/255, green: 62/255, blue: 102/255), end: Color(red: 219/255, green: 94/255, blue: 92/255)), textColor: Color(red: 130/255, green: 130/255, blue: 130/255), legendTextColor: Color.black, dropShadowColor: Color.black)
     
     var body: some View {
         ZStack {
@@ -27,7 +25,7 @@ struct Activity: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding(.leading)
-                        .padding(.top, 10)
+                        .padding(.top, 20)
                     Spacer()
                 }
                 
@@ -35,15 +33,13 @@ struct Activity: View {
                     VStack(alignment: .leading) {
                         GeometryReader { geometry in
                             VStack {
-                                BarChartView(
-                                    data: ChartData(points: moodData),
+                                LineView(
+                                    data: self.graphNetworking.moodArray,
                                     title: "Mood",
                                     legend: "Past month",
-                                    style: chartStyle,
-                                    form: CGSize(width: geometry.size.width, height: 180),
-                                    dropShadow: false
+                                    style: chartStyle
                                 )
-                                    .padding(.top)
+                                    .padding()
                                     .background(
                                         RoundedRectangle(cornerRadius: 20)
                                             .fill(Color(white: 1.0, opacity: 1.0))
@@ -51,8 +47,8 @@ struct Activity: View {
                                             .padding(.top)
                                     )
                                 
-                                PieChartView(
-                                    data: categoryData,
+                                BarChartView(
+                                    data: ChartData(values: self.graphNetworking.category),
                                     title: "Categories",
                                     style: chartStyle,
                                     form: CGSize(width: geometry.size.width, height: 180),
@@ -64,10 +60,11 @@ struct Activity: View {
                                             .fill(Color(white: 1.0, opacity: 1.0))
                                             .shadow(radius: 3)
                                             .padding(.top)
+                                            
                                     )
                             }
                         }
-                        .frame(height: 400)
+                        .frame(height: 620)
                         
                         ZStack {
                             RoundedRectangle(cornerRadius: 20)
@@ -80,21 +77,7 @@ struct Activity: View {
                                         .fontWeight(.bold)
                                         .padding(.leading, 20.0)
                                     Spacer()
-                                    Text("\(numPosts)")
-                                        .font(.title)
-                                        .fontWeight(.light)
-                                        .foregroundColor(Color(red: 130/255, green: 130/255, blue: 130/255))
-                                        .padding(.trailing, 20.0)
-                                }
-                                .padding(.top, 10.0)
-                                
-                                HStack {
-                                    Text("Followers")
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                        .padding(.leading, 20.0)
-                                    Spacer()
-                                    Text("\(numFollowers)")
+                                    Text(String(self.network.userPosts.count))
                                         .font(.title)
                                         .fontWeight(.light)
                                         .foregroundColor(Color(red: 130/255, green: 130/255, blue: 130/255))
@@ -108,7 +91,7 @@ struct Activity: View {
                                         .fontWeight(.bold)
                                         .padding(.leading, 20.0)
                                     Spacer()
-                                    Text("\(numFollowing)")
+                                    Text(String(self.network.user.following.count))
                                         .font(.title)
                                         .fontWeight(.light)
                                         .foregroundColor(Color(red: 130/255, green: 130/255, blue: 130/255))
@@ -122,6 +105,10 @@ struct Activity: View {
                     .padding(.horizontal)
                 }
             }
+        }.onAppear {
+            self.graphNetworking.fetchGraphData(username: "justinyaodu")
+            self.network.fetchUserFeed(username: "justinyaodu")
+            self.network.fetchUser(username: "justinyaodu")
         }
     }
 }
