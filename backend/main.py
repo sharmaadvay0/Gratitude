@@ -42,7 +42,10 @@ def get_sentiment_mood(body):
             type_=language_v1.Document.Type.PLAIN_TEXT)
     response = client.analyze_sentiment(request={"document": document})
     sentiment = response.document_sentiment
-    return (sentiment.score + 1) / 2
+    mood = (sentiment.score + 1) / 2
+    mood = (mood - 0.3) * 1.4
+    mood = max(0, min(1, mood))
+    return mood
 
 
 def get_user_ref(username):
