@@ -15,6 +15,8 @@ struct Activity: View {
     let numFollowers: Int = 20
     let numFollowing: Int = 30
     
+    @ObservedObject var graphNetworking = GraphNetworking()
+    
     let chartStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color(red: 255/255, green: 163/255, blue: 24/255), gradientColor: GradientColors.orange, textColor: Color(red: 130/255, green: 130/255, blue: 130/255), legendTextColor: Color.black, dropShadowColor: Color.black)
     
     var body: some View {
@@ -35,15 +37,15 @@ struct Activity: View {
                     VStack(alignment: .leading) {
                         GeometryReader { geometry in
                             VStack {
-                                BarChartView(
-                                    data: ChartData(points: moodData),
+                                LineView(
+                                    data: moodData,
                                     title: "Mood",
                                     legend: "Past month",
-                                    style: chartStyle,
-                                    form: CGSize(width: geometry.size.width, height: 180),
-                                    dropShadow: false
+                                    style: chartStyle
+//                                    form: CGSize(width: geometry.size.width, height: 180),
+//                                    dropShadow: false
                                 )
-                                    .padding(.top)
+                                    .padding()
                                     .background(
                                         RoundedRectangle(cornerRadius: 20)
                                             .fill(Color(white: 1.0, opacity: 1.0))
@@ -51,9 +53,10 @@ struct Activity: View {
                                             .padding(.top)
                                     )
                                 
-                                PieChartView(
-                                    data: categoryData,
+                                BarChartView(
+                                    data: ChartData(values: self.graphNetworking.category),
                                     title: "Categories",
+                                    legend: "Past Month",
                                     style: chartStyle,
                                     form: CGSize(width: geometry.size.width, height: 180),
                                     dropShadow: false
@@ -64,10 +67,11 @@ struct Activity: View {
                                             .fill(Color(white: 1.0, opacity: 1.0))
                                             .shadow(radius: 3)
                                             .padding(.top)
+                                            
                                     )
                             }
                         }
-                        .frame(height: 400)
+                        .frame(height: 620)
                         
                         ZStack {
                             RoundedRectangle(cornerRadius: 20)
@@ -122,6 +126,8 @@ struct Activity: View {
                     .padding(.horizontal)
                 }
             }
+        }.onAppear {
+            self.graphNetworking.fetchGraphData(username: "justinyaodu")
         }
     }
 }
