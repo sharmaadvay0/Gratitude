@@ -11,6 +11,7 @@ class Networking: ObservableObject {
     @Published var posts = [Post]()
     @Published var user:User = User(following: [], realName: "")
     @Published var userPosts = [Post]()
+    @Published var totalChange = 0.0
     
     func fetchFeed(username:String) {
         if let url = URL(string: "https://gratitude-310305.uc.r.appspot.com/api/feed/" + username) {
@@ -64,9 +65,10 @@ class Networking: ObservableObject {
                     let jsonDecoder = JSONDecoder()
                     if let checkedData = data {
                         do {
-                            let result = try jsonDecoder.decode(Feed.self, from: checkedData)
+                            let result = try jsonDecoder.decode(History.self, from: checkedData)
                             DispatchQueue.main.async {
                                 self.userPosts = result.posts
+                                self.totalChange = result.totalChange
                             }
                         } catch {
                             print(error)
@@ -78,13 +80,14 @@ class Networking: ObservableObject {
         }
     }
     
-    func postNewPost(post: Post, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+    func postNewPost(post: NewPost, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         if let url = URL(string: "https://gratitude-310305.uc.r.appspot.com/api/post") {
             let jsonEncoder = JSONEncoder()
             do {
                 let data = try jsonEncoder.encode(post)
                 let urlSession = URLSession(configuration: .default)
                 var urlRequest = URLRequest(url: url)
+                urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
                 urlRequest.httpMethod = "POST"
                 let uploadTask = urlSession.uploadTask(with: urlRequest, from: data, completionHandler: completionHandler)
                 uploadTask.resume()
