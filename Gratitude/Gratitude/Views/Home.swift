@@ -90,7 +90,7 @@ struct ListOfPosts: View {
             LazyVStack {
                 ForEach(posts, id: \.self) {
                     post in
-                    PostPreview(name: post.username, info: post.body, category: post.category, moodRating: post.userMood)
+                    PostPreview(name: "@" + post.username, info: post.body, category: post.category, moodRating: post.userMood)
                 }
             }.padding(.bottom, 100)
         }
