@@ -9,14 +9,9 @@ import SwiftUI
 
 struct Home: View {
     
-    func getCurrentDate() -> String {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.setLocalizedDateFormatFromTemplate("MMMMd")
-        
-        return formatter.string(from: date)
-    }
+    
     @State var makePost = false
+    @ObservedObject var network = Networking()
     
     var body: some View {
         NavigationView {
@@ -26,16 +21,7 @@ struct Home: View {
                     
                     HStack(alignment: .top) {
                         
-                        VStack(alignment: .leading) {
-                            
-                            Text(self.getCurrentDate() + "th")
-                                .padding(.bottom, 5)
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(.init(red: 130/255, green: 130/255, blue: 130/255))
-                            
-                            Text("Welcome Name!").font(.system(size: 24)).fontWeight(.bold)
-                            
-                        }.padding(.leading, 25).padding(.top, 10)
+                        Header(name: network.user.realName)
                         
                         Spacer()
                         
@@ -48,11 +34,14 @@ struct Home: View {
                         })
                     }.padding(.trailing, 25)
                     
-                    ListOfPosts()
+                    ListOfPosts(posts: network.posts)
                     
                     Spacer()
                     
                 }
+            }.onAppear {
+                self.network.fetchFeed(username: "justinyaodu")
+                self.network.fetchUser(username: "justinyaodu")
             }
             
             
@@ -67,11 +56,13 @@ struct Home: View {
 struct PostPreview: View {
     let name: String?
     let info: String?
+    let category: String?
+    let moodRating: Double?
     
     var body: some View {
         
         NavigationLink(
-            destination: PostDetails(),
+            destination: PostDetails(name: name ?? "Name", info: info ?? "Post Info", category: category ?? "other", moodRating: moodRating ?? 5.0),
             label: {
                 ZStack {
                     HStack {
@@ -89,24 +80,49 @@ struct PostPreview: View {
             })
         
         
-        
-        
-        
-        
     }
 }
 
 struct ListOfPosts: View {
-    var n = 0
+    var posts: [Post]
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(0..<10) {
-                    number in
-                    PostPreview(name: "Test Name", info: "Test Info")
+                ForEach(posts, id: \.self) {
+                    post in
+                    PostPreview(name: post.username, info: post.body, category: post.category, moodRating: post.userMood)
                 }
             }.padding(.bottom, 100)
         }
+    }
+}
+
+struct Header: View {
+    var name:String
+    var body: some View {
+        VStack(alignment: .leading) {
+            
+            DateText()
+            
+            Text("Welcome " + name + "!").font(.system(size: 24)).fontWeight(.bold)
+            
+        }.padding(.leading, 25).padding(.top, 10)
+    }
+}
+
+struct DateText: View {
+    func getCurrentDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("MMMMd")
+        
+        return formatter.string(from: date)
+    }
+    var body: some View {
+        Text(self.getCurrentDate() + "th")
+            .padding(.bottom, 5)
+            .font(.system(size: 16, weight: .bold))
+            .foregroundColor(.init(red: 130/255, green: 130/255, blue: 130/255))
     }
 }
 
