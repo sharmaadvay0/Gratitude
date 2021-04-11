@@ -10,10 +10,8 @@ import SwiftUI
 struct CreatePost: View {
     @Binding var isShown: Bool
     @State private var mood: Double = 4.0
-    @State private var categories: [String: Bool] = ["Family": false, "Friends": false, "Nature": false, "Community": false, "Career": false, "Education": false]
+    @State private var selectedCategory: String = ""
     @State private var postText: String = "Today I am feeling..."
-    
-    private let categoryRows: [[String]] = [["Family", "Friends", "Nature"], ["Community", "Career", "Education"]]
     
     init(isShown: Binding<Bool>) {
         _isShown = isShown
@@ -62,25 +60,14 @@ struct CreatePost: View {
                                 .frame(width: 50.0)
                         }
                         
-                        Text("Categories")
+                        Text("Category")
                             .font(.title2)
                             .fontWeight(.bold)
                             .padding(.top, 25)
                         Text("What are you grateful for right now?")
                             .font(.footnote)
                         
-                        VStack {
-                            ForEach(categoryRows, id: \.self) { categoryRow in
-                                HStack {
-                                    ForEach(categoryRow, id: \.self) { category in
-                                        CategoryButton(selected: categories[category] ?? false, text: category)
-                                            .onTapGesture {
-                                            categories[category] = !(categories[category] ?? false)
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        CategoryView(selectedCategory: $selectedCategory)
                         
                         Text("Description")
                             .font(.title2)
@@ -124,6 +111,88 @@ struct CreatePost_Previews: PreviewProvider {
     }
 }
 
+// this doesn't display properly in the preview, but works otherwise
+struct CategoryView: View {
+    @Binding var selectedCategory: String
+    @State private var totalHeight = CGFloat.zero
+    private var categories: [String] = ["activities", "art", "career", "community", "emotions", "family", "food", "health", "nature", "necessities", "technology", "other"]
+    private var categoryTitles: [String: String] = [
+        "activities": "Activities & Experiences",
+        "art": "Art",
+        "career": "Career & Education",
+        "community": "Community",
+        "emotions": "Emotions & Faith",
+        "family": "Family & Friends",
+        "food": "Food & Drink",
+        "health": "Health & Fitness",
+        "nature": "Nature & Weather",
+        "necessities": "Necessities",
+        "technology": "Technology",
+        "other": "Other"
+    ]
+    
+    init(selectedCategory: Binding<String>) {
+        _selectedCategory = selectedCategory
+    }
+    
+    private func generateCategories(_ geometry: GeometryProxy) -> some View {
+        var width = CGFloat.zero
+        var height = CGFloat.zero
+        
+        return ZStack(alignment: .topLeading) {
+            ForEach(categories, id: \.self) { category in
+                CategoryButton(
+                    selected: category == selectedCategory,
+                    text: categoryTitles[category] ?? category
+                )
+                .onTapGesture {
+                    selectedCategory = category
+                }
+                .alignmentGuide(.leading, computeValue: { d in
+                    if (abs(width - d.width) > geometry.size.width) {
+                        width = 0
+                        height -= d.height
+                    }
+                    let result = width
+                    if category == categories.last! {
+                        width = 0
+                    } else {
+                        width -= d.width
+                    }
+                    return result
+                })
+                .alignmentGuide(.top, computeValue: { d in
+                    let result = height
+                    if category == categories.last! {
+                        height = 0
+                    }
+                    return result
+                })
+            }
+        }
+        .background(viewHeightReader($totalHeight))
+    }
+    
+    private func viewHeightReader(_ binding: Binding<CGFloat>) -> some View {
+        return GeometryReader { geometry -> Color in
+            let rect = geometry.frame(in: .local)
+            DispatchQueue.main.async {
+                binding.wrappedValue = rect.size.height
+            }
+            return .clear
+        }
+    }
+    
+    var body: some View {
+        VStack {
+            GeometryReader { geometry in
+                generateCategories(geometry)
+            }
+        }
+        .frame(height: totalHeight)
+    }
+}
+
 struct CategoryButton: View {
     private var selected: Bool = false
     private var text: String = ""
@@ -134,14 +203,16 @@ struct CategoryButton: View {
     }
     
     var body: some View {
-        ZStack {
-            Capsule()
-                .fill(self.selected ? Color(red: 242/255, green: 163/255, blue: 24/255) : Color(red: 222/255, green: 222/255, blue: 222/255))
-                .frame(height: 30.0)
-            Text(self.text)
-                .font(.footnote)
-                .fontWeight(self.selected ? .bold : .regular)
-                .foregroundColor(self.selected ? Color.white : Color(white: 0.4))
-        }
+        Text(self.text)
+            .font(.footnote)
+            .fontWeight(.bold)
+            .foregroundColor(self.selected ? Color.white : Color(white: 0.4))
+            .padding(.vertical, 6.0)
+            .padding(.horizontal, 15.0)
+            .background(
+                Capsule()
+                    .fill(self.selected ? Color(red: 242/255, green: 163/255, blue: 24/255) : Color(red: 222/255, green: 222/255, blue: 222/255))
+            )
+            .padding(2.0)
     }
 }
